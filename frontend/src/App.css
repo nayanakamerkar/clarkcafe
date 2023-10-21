@@ -7,6 +7,35 @@
   pointer-events: none;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 1rem;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.navbar-links {
+  display: flex;
+}
+
+.navbar-item {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.navbar-item:hover {
+  text-decoration: underline;
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
