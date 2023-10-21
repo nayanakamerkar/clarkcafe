@@ -2,26 +2,26 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
 function Register() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     mobileNumber: '',
-    id: '',
+    clarkId: '',
+    password: '',
   });
 
-  const { name, email, mobileNumber, id } = formData;
+  const { name, email, mobileNumber, clarkId, password } = formData;
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async e => {
     e.preventDefault();
-
     try {
       const res = await axios.post('http://localhost:4000/api/users/register', formData);
-      console.log(res.data);
     } catch (err) {
-      console.log(err.response.data);
+      console.log(err);
     }
   };
 
@@ -61,10 +61,20 @@ function Register() {
         </div>
         <div>
           <input
+            type="text"
+            placeholder="Clark Id"
+            name="clarkId"
+            value={clarkId}
+            onChange={onChange}
+            required
+          />
+        </div>
+        <div>
+          <input
             type="password"
             placeholder="ID"
-            name="id"
-            value={id}
+            name="password"
+            value={password}
             onChange={onChange}
             required
           />
