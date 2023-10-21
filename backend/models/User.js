@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
   },
   userType: {
     type: [String], 
+    enum: ['student', 'cashier', 'staff', 'admin'],
     default: ['student'],
   },
   stripeId: {
@@ -32,7 +33,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String
   },
-  
+
 });
 
 const User = mongoose.model('User', userSchema);
