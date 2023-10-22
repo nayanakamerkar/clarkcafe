@@ -2,6 +2,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import ProductCard from './ProductCard';
+import Cart from './Cart';
 
 const product = {
   productName: 'Pepsi',
@@ -18,6 +19,7 @@ const MainPage = () => {
       <Navbar />
       <h1>Welcome to Clark Cafe</h1>
       <ProductCard product={product} />
+      <Cart></Cart>
     </div>
   );
 };
