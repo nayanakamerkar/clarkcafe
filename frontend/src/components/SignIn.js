@@ -1,5 +1,7 @@
 // client/src/components/SignIn.js
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 const SignIn = () => {
@@ -23,7 +25,10 @@ const SignIn = () => {
       });
 
       console.log('JWT Token:', res.data.token);
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('userType', res.data.userType);
     } catch (err) {
+        toast.error(err.response.data.msg);
       console.error(err.response.data.msg);
     }
   };

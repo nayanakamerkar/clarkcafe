@@ -1,36 +1,68 @@
 // client/src/components/AddProduct.js
-import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const AddProduct = () => {
   const [formData, setFormData] = useState({
-    productName: '',
+    name: '',
     price: '',
     categoryId: '',
-    tagsId: [],
+    tagId: '',
     isActive: true,
-    image: '',
     prepTime: '',
     facts: '',
   });
+  const [categories, setCategories] = useState([]);
+  const [tags, setTags] = useState([]);
 
-  const { productName, price, categoryId, tagsId, isActive, image, prepTime, facts } = formData;
+  useEffect(() => {
+    // Fetch categories and tags from backend
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const res = await axios.get('http://localhost:4000/api/products/categories-tags', {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        setCategories(res.data.categories);
+        setTags(res.data.tags);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-  const onChange = (e) =>
+    fetchData();
+  }, []);
+
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     try {
+        const token = localStorage.getItem('token');
       const res = await axios.post('http://localhost:4000/api/products', formData, {
         headers: {
-          'x-auth-token': localStorage.getItem('token'), // pass the token for authentication
-        },
+            Authorization: `Bearer ${token}`,
+        }
       });
-
+      toast.success('Product added successfully');
       console.log(res.data);
+      setFormData({
+        name: '',
+        price: '',
+        categoryId: '',
+        tagId: '',
+        isActive: '',
+        prepTime: '',
+        facts: '',
+      });
     } catch (err) {
+        toast.error('Failed to add product');
       console.error(err.response.data);
     }
   };
@@ -38,77 +70,82 @@ const AddProduct = () => {
   return (
     <form onSubmit={onSubmit}>
       <div>
+        <label>Product Name</label>
         <input
           type="text"
-          placeholder="Product Name"
-          name="productName"
-          value={productName}
+          name="name"
+          value={formData.name}
           onChange={onChange}
           required
         />
       </div>
       <div>
+        <label>Price</label>
         <input
           type="number"
-          placeholder="Price"
           name="price"
-          value={price}
+          value={formData.price}
           onChange={onChange}
           required
         />
       </div>
       <div>
-        <input
-          type="text"
-          placeholder="Category ID"
+        <label>Category</label>
+        <select
           name="categoryId"
-          value={categoryId}
+          value={formData.categoryId}
           onChange={onChange}
           required
-        />
+        >
+          <option value="">Select Category</option>
+          {categories.map((category) => (
+            <option key={category._id} value={category._id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
       </div>
       <div>
-        <input
-          type="text"
-          placeholder="Tags ID (comma separated)"
-          name="tagsId"
-          value={tagsId}
-          onChange={(e) => setFormData({ ...formData, tagsId: e.target.value.split(',') })}
-          required
-        />
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="Image URL"
-          name="image"
-          value={image}
+        <label>Tags</label>
+        <select
+          name="tagId"
+          value={formData.tagId}
           onChange={onChange}
-        />
+          required
+        >
+          <option value="">Select Tag</option>
+          {tags.map((tag) => (
+            <option key={tag._id} value={tag._id}>
+              {tag.name}
+            </option>
+          ))}
+        </select>
       </div>
       <div>
+        <label>Preparation Time</label>
         <input
           type="number"
-          placeholder="Preparation Time"
           name="prepTime"
-          value={prepTime}
+          value={formData.prepTime}
           onChange={onChange}
+          required
         />
       </div>
       <div>
+        <label>Facts</label>
         <textarea
-          placeholder="Facts"
           name="facts"
-          value={facts}
+          value={formData.facts}
           onChange={onChange}
-        />
+          required
+        ></textarea>
       </div>
       <div>
         <input
           type="checkbox"
           name="isActive"
-          checked={isActive}
-          onChange={(e) => setFormData({ ...formData, isActive: !isActive })}
+          checked={formData.isActive}
+          onChange={() => setFormData({ ...formData, isActive: !formData.isActive })}
         />
         <label>Is Active</label>
       </div>

@@ -7,7 +7,7 @@ function Navbar() {
   return (
     <div className="simple-navbar">
       <div className="navbar-logo">
-        🍔GRUBHUB
+        🍔CLARK CAFE
       </div>
       <div className="navbar-search">
         <input type="text" placeholder="Search for food, beverages..." />

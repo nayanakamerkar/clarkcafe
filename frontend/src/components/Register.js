@@ -1,9 +1,13 @@
 // client/src/components/Register.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 
 function Register() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,7 +24,10 @@ function Register() {
     e.preventDefault();
     try {
       const res = await axios.post('http://localhost:4000/api/users/register', formData);
+      toast.success('User registered successfully');
+      navigate('/signin');
     } catch (err) {
+      toast.error('User registration failed');
       console.log(err);
     }
   };
