@@ -6,8 +6,9 @@ import './ProductCard.css'
 function ProductCard({ product }) {
     const [quantity, setQuantity] = useState(1);
     const { addItem } = useCart();
+
     return (
-        <div className="product-card">
+        <div className="product-card" key={product.id}>
             <h2>{product.productName}</h2>
             <img src={product.productImage} alt={product.productName} width="200" />
             <div className="tags">

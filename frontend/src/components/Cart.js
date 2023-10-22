@@ -1,24 +1,27 @@
-import React from 'react'
+import React from 'react';
+import { useCart } from 'react-use-cart';
 
 const Cart = () => {
 
     const {
         isEmpty,
-        totalUniqueItems,
+        totalItems,
         items,
         updateItemQuantity,
         removeItem,
     } = useCart();
 
+
     if (isEmpty) return <p>Your Cart is empty</p>
 
     return (
         <div>
-            <h1>Your Cart ({totalUniqueItems})</h1>
+            <h1>Your Cart ({totalItems})</h1>
             <ul>
+                {console.log(items)}
                 {items.map((item) => (
-                    <li key={item.id}>
-                        {item.quantity} x {item.name} &mdash;
+                    < li key={item.id} >
+                        {item.quantity} x {item.name} & mdash;
                         <button
                             onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
                         >
@@ -33,7 +36,7 @@ const Cart = () => {
                     </li>
                 ))}
             </ul>
-        </div>
+        </div >
     )
 }
 

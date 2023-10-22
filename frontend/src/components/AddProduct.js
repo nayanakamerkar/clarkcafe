@@ -1,5 +1,5 @@
 // client/src/components/AddProduct.js
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -23,9 +23,9 @@ const AddProduct = () => {
       try {
         const token = localStorage.getItem('token');
         const res = await axios.get('http://localhost:4000/api/products/categories-tags', {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
         });
         setCategories(res.data.categories);
         setTags(res.data.tags);
@@ -44,10 +44,10 @@ const AddProduct = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-        const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');
       const res = await axios.post('http://localhost:4000/api/products', formData, {
         headers: {
-            Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         }
       });
       toast.success('Product added successfully');
@@ -62,7 +62,7 @@ const AddProduct = () => {
         facts: '',
       });
     } catch (err) {
-        toast.error('Failed to add product');
+      toast.error('Failed to add product');
       console.error(err.response.data);
     }
   };

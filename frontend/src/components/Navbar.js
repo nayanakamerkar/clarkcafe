@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function Navbar() {
   return (
@@ -14,8 +15,8 @@ function Navbar() {
       </div>
 
       <div className="navbar-icons">
-        <span>👤 Sign in</span>
-        <span>🛒</span>
+        <button>Sign in</button>
+        <ShoppingCartIcon>Cart</ShoppingCartIcon>
       </div>
     </div>
   );
