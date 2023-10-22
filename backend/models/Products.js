@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: true,
+   // required: true,
   },
   categoryId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -23,12 +23,11 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  tags: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Tag',
-    },
-  ],
+  tagId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tag',
+    required: true,
+  },
   prepTime: {
     type: Number,
     required: true,

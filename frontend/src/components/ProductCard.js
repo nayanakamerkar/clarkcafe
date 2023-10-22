@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "ProductCard.css";
+import './ProductCard.css'
 
 function ProductCard({ product }) {
     const [quantity, setQuantity] = useState(1);
@@ -31,7 +31,8 @@ function ProductCard({ product }) {
                 <span>{quantity}</span>
                 <button onClick={() => setQuantity(q => q + 1)}>+</button>
             </div>
-            <button className="add-to-cart-btn">Add to Cart</button>
+
+            <button className="add-to-cart-btn" onClick={() => console.log(product)}>Add to Cart</button>
         </div>
     );
 }

@@ -1,24 +1,26 @@
 // client/src/components/Navbar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Navbar.css';
 
-const Navbar = () => {
+function Navbar() {
   return (
-    <nav className="navbar">
-      <Link to="/" className="navbar-brand">
-        Clark Cafe
-      </Link>
-      <div className="navbar-links">
-        <Link to="/register" className="navbar-item">
-          Register
-        </Link>
-        <Link to="/signin" className="navbar-item">
-          Sign In
-        </Link>
-        
+    <div className="simple-navbar">
+      <div className="navbar-logo">
+        🍔CLARK CAFE
       </div>
-    </nav>
+      <div className="navbar-search">
+        <input type="text" placeholder="Search for food, beverages..." />
+      </div>
+
+      <div className="navbar-icons">
+        <span>👤 Sign in</span>
+        <span>🛒</span>
+      </div>
+    </div>
   );
-};
+}
 
 export default Navbar;
+
+
