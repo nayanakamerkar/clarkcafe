@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useCart } from 'react-use-cart';
 import './ProductCard.css'
+
 
 function ProductCard({ product }) {
     const [quantity, setQuantity] = useState(1);
-
+    const { addItem } = useCart();
     return (
         <div className="product-card">
             <h2>{product.productName}</h2>
@@ -32,7 +34,7 @@ function ProductCard({ product }) {
                 <button onClick={() => setQuantity(q => q + 1)}>+</button>
             </div>
 
-            <button className="add-to-cart-btn" onClick={() => console.log(product)}>Add to Cart</button>
+            <button className="add-to-cart-btn" onClick={() => addItem(product)}>Add to Cart</button>
         </div>
     );
 }
